@@ -5,7 +5,7 @@ class Preview extends Module {
   PImage ModuleBoutput;                //output sent by the active module from the B display
   String textValue = "";
 
-  int imgWidth = 844;
+  int imgWidth = 800;
   int imgHeight;
   //int previewHeight = 840;
 

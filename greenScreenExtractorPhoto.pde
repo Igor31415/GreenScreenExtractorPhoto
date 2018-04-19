@@ -16,7 +16,7 @@ int grabberAposY = 46-30;
 int grabberBposY = 400-30;
 
 void setup() {
-  size (1440, 720, P3D);
+  size (1440, 745, P3D);
 
   activeModules = new Module [2];
 

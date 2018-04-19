@@ -4,8 +4,12 @@ class ImageGrabber extends Module {
   String [] fileList;
   PImage []imgs;
   int cursor = 0;
-  int grabberHeight = 275;
-  int grabberWidth;
+  int setOutputWidth = 800;
+  int setOutputHeight = 600;
+  int outputHeight;
+  int outputWidth;
+  int widthOffset;
+  int heightOffset;
 
   ImageGrabber(PApplet parent, int x, int y, String path) {
     super(parent);
@@ -52,16 +56,26 @@ class ImageGrabber extends Module {
       .setColorBackground(color(255, 1))
       .setColorForeground(color(255, 1))
       .setText("ImageGrabber")
-    ;
+      ;
   }
 
   PImage draw(PImage i) {
-    output = imgs[cursor];
-    if (imgs[cursor].width > imgs[cursor].height){
-      
+    //output = imgs[cursor];
+
+    if (imgs[cursor].width > imgs[cursor].height) {
+      outputWidth = round(setOutputHeight * (imgs[cursor].width/((float)imgs[cursor].height)));
+      widthOffset = round(imgs[cursor].width/2 - setOutputWidth/2);
+      if (widthOffset < 0) widthOffset =0;
+      imgs[cursor].resize(outputWidth, setOutputHeight);
+      output = imgs[cursor].get(widthOffset, 0, setOutputWidth, setOutputHeight);
+    } else {
+      outputHeight = round(setOutputWidth * (imgs[cursor].height/((float)imgs[cursor].width)));
+      heightOffset = round(imgs[cursor].height/2 - setOutputHeight/2);
+      if (heightOffset < 0) heightOffset =0;
+      imgs[cursor].resize(setOutputWidth, outputHeight);
+      output = imgs[cursor].get(0, heightOffset, setOutputWidth, setOutputHeight);
     }
-    grabberWidth = round(output.width*(grabberHeight/((float)output.height)));
-    image(output, x, y+30, grabberWidth, grabberHeight);
+    image(output, x, y+30, setOutputWidth/2, setOutputHeight/2);
     return output;
   }
 

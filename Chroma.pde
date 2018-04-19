@@ -2,7 +2,7 @@ class Chroma  extends Module {
   float treshold = 0;
   PVector target;
   PVector targetPos;
-  int grabberHeight = 275;
+  int grabberHeight = 300;
   int grabberWidth;
   boolean toggle = false;
 
